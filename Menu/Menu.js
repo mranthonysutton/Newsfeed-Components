@@ -38,20 +38,22 @@ function menuCreator(linkArray) {
   // Create elements
   const menu = document.createElement("div");
   const list = document.createElement("ul");
-  const listItem = document.createElement("li");
   const header = document.querySelector(".header");
   const menuButton = document.querySelector(".menu-button");
 
   // Add class
   menu.classList.add("menu");
 
-  // Text content
-  listItem.textContent = "Links";
+  // Loop through link array, create an li for each link, add that individual li to the ul, then add the text content
+  linkArray.forEach(link => {
+    let listItem = document.createElement("li");
+    list.appendChild(listItem);
+    listItem.textContent = link;
+  });
 
   // Add items
   header.appendChild(menu);
   menu.appendChild(list);
-  list.appendChild(listItem);
 
   // Events
   menuButton.addEventListener("click", () => {
