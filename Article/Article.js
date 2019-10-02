@@ -85,6 +85,16 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "Coffee Produces Code",
+    date: "Oct 2nd, 2019",
+    firstParagraph: `Extra mazagran, cup lungo, con panna americano at, steamed so barista mug wings. Carajillo variety organic, sit, body viennese cup flavour macchiato wings. Barista seasonal french press con panna, crema at, strong extraction breve cup macchiato. Robusta froth, con panna milk irish, coffee, barista seasonal breve redeye in strong.
+    `,
+
+    secondParagraph: `Blue mountain, aromatic doppio, redeye, as redeye crema mazagran pumpkin spice. Skinny, cappuccino cream steamed, redeye frappuccino iced kopi-luwak irish. Barista, pumpkin spice flavour single shot, whipped java crema robust rich iced. Galão acerbic mazagran, variety con panna java café au lait macchiato robusta et bar saucer.`,
+
+    thirdParagraph: `Affogato breve milk, variety, irish white half and half black crema. Viennese, irish, white roast cup, instant mug plunger pot single origin sweet milk body. Single shot foam, medium, aroma, cortado filter cup pumpkin spice café au lait foam barista grinder. Steamed cream, black java robusta strong café au lait beans affogato black.`
   }
 ];
 
@@ -103,29 +113,30 @@ const data = [
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div. --- DONE
 
-  Step 3: return the entire component.
+  Step 3: return the entire component. -- DONE
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div. -- DONE
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article. --- DONE
 
 */
 
-const container = document.querySelector(".articles");
-data.forEach(article => {
-  container.appendChild(
-    articleCreator(article.title, article.date, article.firstParagraph)
-  );
-});
-
-function articleCreator(title, date, content) {
+function articleCreator(
+  title,
+  date,
+  firstParagraph,
+  secondParagraph,
+  thirdParagraph
+) {
   // Create elements
   const articleContainer = document.createElement("div");
   const articleHeader = document.createElement("h2");
   const articleDate = document.createElement("p");
-  const articleText = document.createElement("p");
+  const firstParagraphText = document.createElement("p");
+  const secondParagraphText = document.createElement("p");
+  const thirdParagraphText = document.createElement("p");
   const button = document.createElement("span");
 
   // Add classes
@@ -136,13 +147,17 @@ function articleCreator(title, date, content) {
   // Content
   articleHeader.textContent = title;
   articleDate.textContent = date;
-  articleText.textContent = content;
-  button.textContent = "Read More";
+  firstParagraphText.textContent = firstParagraph;
+  secondParagraphText.textContent = secondParagraph;
+  thirdParagraphText.textContent = thirdParagraph;
+  button.textContent = "Expand";
 
   // Add Elements
   articleContainer.appendChild(articleHeader);
   articleContainer.appendChild(articleDate);
-  articleContainer.appendChild(articleText);
+  articleContainer.appendChild(firstParagraphText);
+  articleContainer.appendChild(secondParagraphText);
+  articleContainer.appendChild(thirdParagraphText);
   articleContainer.appendChild(button);
 
   // article-open
@@ -154,4 +169,16 @@ function articleCreator(title, date, content) {
   return articleContainer;
 }
 
-articleCreator();
+const container = document.querySelector(".articles");
+
+data.forEach(article => {
+  container.appendChild(
+    articleCreator(
+      article.title,
+      article.date,
+      article.firstParagraph,
+      article.secondParagraph,
+      article.thirdParagraph
+    )
+  );
+});
